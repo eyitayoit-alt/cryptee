@@ -1,0 +1,296 @@
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+#: import ScreenManager kivy.uix.screenmanager.ScreenManager
+
+<ApScreen>:
+		Screen:
+				name:"Landing"
+				Image:
+						source:"icon.png"
+						on_touch_down:root.current="CheckMenu"
+	
+					
+					
+					
+		Screen:
+				name:"CheckMenu"
+				canvas:
+						Color:
+								rgb:0.8,0.6,0.1
+						Rectangle:
+								size:self.size
+								pos:self.pos	
+								
+				BoxLayout:
+						orientation:"vertical"
+						pos_hint:{"x":0.1,"y":0.4}
+						spacing:10
+						size_hint:(0.8,0.3)
+						
+						Label:
+								text:"What do you want to do?"
+								font_size:40
+						
+						
+						Button:
+								id:encrypt
+								background_normal:" "
+								background_color: [1,0,0,0.5]
+								text:"Encrypt File"
+								font_size:25
+								size_hint:(1,None)
+								height:50
+								on_release:root.current="encryptscreen"
+								
+						Button:
+								id:decrypt
+								text:"Decrypt File"
+								font_size:25
+								size_hint:(1,None)
+								height:50
+								background_normal:" "
+								background_color: [1,0,0,0.5]
+								on_release:root.current="decryptscreen"
+		
+		Encryption:
+				name:"encryptscreen"
+				on_touch_move:root.current="CheckMenu"
+				canvas:
+						Color:
+								rgb:0.6,0.5,0.5
+						Rectangle:
+								size:self.size
+								pos:self.pos
+				BoxLayout:
+						orientation:"vertical"
+						size_hint:(0.9,0.2)
+						pos_hint:{"x":0.15,"y":0.72}
+						Label:
+								id:e_mode
+								text:"Encryption Mode"
+								size_hint:(0.8,None)
+								font_size:40
+								height:50
+						Label:
+								id:e_msg
+								text:" "
+								text_size:root.width,None
+								size:self.texture_size
+								font_size:40
+								height:50
+								
+								
+								
+								
+				BoxLayout:
+						orientation:"horizontal"
+						size_hint:(0.9,0.4)
+						pos_hint:{"x":0.05,"y":0.62}
+						spacing:5
+						Button:
+								id:"select"
+								text:"Select File"
+								size_hint:(0.3,None)
+								height:50
+								background_normal:" "
+								background_color: [1,0,0,0.5]
+								on_press:root.show_load("encrypt")
+						TextInput:
+								id:f_input1
+								text:" "
+								size_hint:(0.8,None)
+								height:50
+				BoxLayout:
+						orientation:"vertical"
+						size_hint:(0.9,0.2)
+						pos_hint:{"x":0.05,"y":0.43}
+				
+						
+						Label:
+								text:"Valid Password must containCapitals,number & \n any symbols ($€%_)  and must be >=16  & <=20"
+								font_size:20
+								height:50
+								pos_hint:{"x":0.04}
+				BoxLayout:
+						orientation:"horizontal"
+						size_hint:(0.9,0.4)
+						pos_hint:{"x":0.05,"y":0.38}
+						spacing:5
+						Label:
+								text:"Password"
+								font_size:25
+								size_hint:(0.3,None)
+								height:50
+						TextInput:
+								id:pwd1
+								text:" "
+								size_hint:(0.8,None)
+								height:50
+				BoxLayout:
+						orientation:"vertical"
+						size_hint:(0.9,0.2)
+						pos_hint:{"x":0.4,"y":0.25}
+						Button:
+								id:encrypt
+								text:"Encrypt"
+								size_hint:(0.3,None)
+								height:50
+								background_normal:" "
+								background_color: [1,0,0,0.5]
+								on_release:root.processAction(root.ids.f_input1.text,root.ids.pwd1.text,"encrypt")
+								
+							
+									
+		Decryption:
+				name:"decryptscreen"
+				on_touch_move:root.current="CheckMenu"
+				canvas:
+						Color:
+								rgb:0.7,0.4,0.5
+						Rectangle:
+								size:self.size
+								pos:self.pos
+				BoxLayout:
+						orientation:"vertical"
+						size_hint:(0.9,0.2)
+						pos_hint:{"x":0.15,"y":0.72}
+						Label:
+								id:d_mode
+								text:"Decryption Mode"
+								size_hint:(0.8,None)
+								
+								font_size:40
+								height:50
+						Label:
+								id:d_msg
+								text:" "
+								text_size: root.width,None
+								size:self.texture_size
+								font_size:40
+								height:50
+								
+								
+				BoxLayout:
+						orientation:"horizontal"
+						size_hint:(0.9,0.4)
+						pos_hint:{"x":0.05,"y":0.62}
+						spacing:5
+						Button:
+								id:"select"
+								text:"Select File"
+								size_hint:(0.3,None)
+								height:50
+								background_normal:" "
+								background_color: [1,0,0,0.5]
+								on_press:root.show_load("decrypt")
+						TextInput:
+								id:f_input2
+								text:" "
+								size_hint:(0.8,None)
+								height:50
+				BoxLayout:
+						orientation:"vertical"
+						size_hint:(0.9,0.2)
+						pos_hint:{"x":0.05,"y":0.43}
+						
+						Label:
+								text:"Valid Password must containCapitals,number & \n any symbols ($€%_)  and must be >=16  & <=20"
+								font_size:20
+								height:50
+								pos_hint:{"x":0.04}
+				BoxLayout:
+						orientation:"horizontal"
+						size_hint:(0.9,0.4)
+						pos_hint:{"x":0.05,"y":0.38}
+						spacing:5
+						Label:
+								text:"Password"
+								font_size:25
+								size_hint:(0.3,None)
+								height:50
+						TextInput:
+								id:pwd2
+								text:" "
+								size_hint:(0.8,None)
+								height:50
+				BoxLayout:
+						orientation:"vertical"
+						size_hint:(0.9,0.2)
+						pos_hint:{"x":0.4,"y":0.26}
+						Button:
+								id:decrypt
+								text:"Decrypt"
+								size_hint:(0.3,None)
+								height:50
+								background_normal:" "
+								background_color: [1,0,0,0.5]
+								on_release:root.processAction(root.ids.f_input2.text,root.ids.pwd2.text,"decrypt")					
+		
+			
+								
+
+<LoadEncFile>:
+		FileChooserIconView:
+				id:filechooser
+				pos_hint:{"x":0.05,"y":0.05}
+				filter:['!.dat','!.mp3','!.mp4','!.3gp']
+				on_selection:root.load(filechooser.path,filechooser.selection,"encrypt")
+		Button:
+				id:cancel
+				text:"Cancel"
+				size_hint:(0.3,0.08)
+				pos_hint:{"x":0.4,"y":0.05}
+				on_release:app.root.dismiss_pop()
+
+<LoadDecFile>:
+		FileChooserIconView:
+				id:filechooser
+				pos_hint:{"x":0.05,"y":0.05}
+				filter:['*.dat']
+				on_selection:root.load(filechooser.path,filechooser.selection,"decrypt")
+			
+				
+		
+		Button:
+				id:cancel
+				text:"Cancel"
+				size_hint:(0.3,0.08)
+				pos_hint:{"x":0.4,"y":0.05}
+				on_release:app.root.dismiss_pop()
+
+
+<AppPop>:
+		Label:
+				id:msg
+				text:" "
+				text_size:root.width,None
+				size:self.texture_size
+				pos:(130,200)
+				
+				
+		Button:
+				id:cancel
+				text:"Close"
+				size_hint:(None,None)
+				width:100
+				height:50
+				pos:(200,200)
+				on_release:app.root.dismiss_pop()
+
+				
+
+
+
+
+
+
+
+		
+						
+				
+	
+	
+
+		
+            
+		
+			
